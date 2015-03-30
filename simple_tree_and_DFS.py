@@ -26,20 +26,9 @@ class Node(object):
         """Set the children of a node, assumed this is list of node(s)"""
         self.children = children
 
-    # def get_parent(self):
-    #    """Return the parent node of a node"""
-    #    return self.parent.value
-
     def get_parent(self):
         """Return the parent node of a node"""
         return self.parent
-
-    # def get_children(self):
-    #    """Return a list of all the values of the children nodes"""
-    #    child_list = []
-    #    for child in self.children:
-    #        child_list.append(child.value)
-    #    return child_list
 
     def get_children(self):
         """Return list of children nodes"""
@@ -76,6 +65,7 @@ c.add_children([g, h])
 
 
 def DFS(target, node):
+    """Takes target value and start node and returns target if found in tree"""
     stack = []
     stack.append(node)
     while stack != []:
