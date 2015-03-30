@@ -69,19 +69,6 @@ a.add_children([b,c])
 b.add_children([d,e,f])
 c.add_children([g,h])
 
-# some testing
-# why does this print name of the node and not value of the node>!
-print(a)
-print type(a)
-print a.value
-print type(a.value)
-print b.get_parent() == "a"
-print a.is_root() == True
-print b.is_root() == False
-print b.is_leaf() == False
-print h.is_leaf() == True
-print a.get_children()
-
 # 2. Implement DFS for tree implementation
 # We are going to start the search with the root node.
 # The function will check if the given node is root. 
@@ -92,12 +79,21 @@ print a.get_children()
 def DFS(target, node):
     stack = []
     stack.append(node)
-    while stack is not empty:
-        visited = c_list.pop()
+    while stack != []:
+        #print "stack is ", stack
+        visited = stack.pop()
+        #print "visited is", visited
         if visited.value == target:
             return target
-        else: 
-           for child in visited. 
+        else:
+           children = visited.get_children()
+           for index in range(1, len(children) + 1):
+               stack.append(children[-index])
+    print "target not found!"
+
+print DFS ("g", a)
+print DFS ("z", a)
+
         
 
 
