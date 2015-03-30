@@ -1,36 +1,46 @@
 # 1. Choose representation for Tree
 # A tree consists of nodes. For this purpose a node has a name, a parent (or None if root),
 # and 0..n children (if 0 then node is leaf)
-# A new node doesn't have parent or children. These need to be added.
+# A default new node doesn't have parent or children. They can be added to an object if these nodes have
+# been instantiated. In this code, the parents are instantiated first and can be added when constructing 
+# a new node. The children need to be added later.
 
 # class for a node object
 class Node(object):
-    # A default node has no parent and no children
-    # If parent node has been instantiated we can pass this as parameter
-    # We cannot pass an object that has not been created yet
-    # For this we'll use add_children method
+    """Class to create a simple node object and some methods"""
+    
+    # create new node object
     def __init__(self, value, parent=None, children=[]):
         self.value = value
         self.parent = parent
         self.children = children
-
-    # seperate functions because objects need to be instantiated before the can be use in declaration
-    # specify parent when creating node, children need to be added later
+    
+    # assume parent of a node is a node
     def add_parent(self, parent):
+        """Set the parent of a node"""
         self.parent = parent
-
+    
+   
     def add_children(self, children):
+        """Set the children of a node, list of node(s)"""
         self.children = children
 
+    #def get_parent(self):
+    #    """Return the parent node of a node"""
+    #    return self.parent.value
+
     def get_parent(self):
-        return self.parent.value
+        """Return the parent node of a node"""
+        return self.parent
+
+    #def get_children(self):
+    #    """Return a list of all the values of the children nodes"""
+    #    child_list = []
+    #    for child in self.children:
+    #        child_list.append(child.value)
+    #    return child_list
 
     def get_children(self):
-        # child_list = []
-        # for all nodes in a tree:
-        # check if self is parent
-        # if parent, add to list
-        # MANUAL FOR NOW
         return self.children
 
     def is_root(self):
@@ -39,14 +49,12 @@ class Node(object):
     def is_leaf(self):
         return self.children == [] 
 
+    # print the value of the object, not object itself
+    # This doesn't seem to work, fix it!
     def __repr__(self):
         return self.value
 
 # create the small tree from example.
-# First instantiate the nodes with their parent nodes
-# We don't really need children now do we?
-# Can I formulate method with will deduce the children?
-# That would be greaaaatttttt
 a = Node("a")
 b = Node("b", a)
 c = Node("c", a)
@@ -56,25 +64,40 @@ f = Node("f", b)
 g = Node("g", c)
 h = Node("h", c)
 
+# add the children to the nodes
 a.add_children([b,c])
 b.add_children([d,e,f])
 c.add_children([g,h])
 
+# some testing
+# why does this print name of the node and not value of the node>!
 print(a)
-print b.get_parent()
-print a.is_root()
-print b.is_root()
-print b.is_leaf()
-print h.is_leaf()
+print type(a)
+print a.value
+print type(a.value)
+print b.get_parent() == "a"
+print a.is_root() == True
+print b.is_root() == False
+print b.is_leaf() == False
+print h.is_leaf() == True
 print a.get_children()
 
-
-#b = Node(a, [d, e, f])
-#c = Node(a, [g, h])
-#d = Node(b, [])
-#e = Node(b, [])
-#f = Node(b, [])
-#g = Node(c, [])
-#h = Node(c, [])
-
 # 2. Implement DFS for tree implementation
+# We are going to start the search with the root node.
+# The function will check if the given node is root. 
+# Besides a node, the function takes a value to check for 
+
+# We want to start to search at the root of the tree, but with this function we could
+# start with any node
+def DFS(target, node):
+    stack = []
+    stack.append(node)
+    while stack is not empty:
+        visited = c_list.pop()
+        if visited.value == target:
+            return target
+        else: 
+           for child in visited. 
+        
+
+
