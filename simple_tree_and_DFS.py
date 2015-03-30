@@ -1,31 +1,32 @@
 # 1. Choose representation for Tree
-# A tree consists of nodes. For this purpose a node has a name, a parent (or None if root),
+# A tree consists of nodes. For this purpose a
+# node has a name, a value, a parent (or None if root),
 # and 0..n children (if 0 then node is leaf)
-# A default new node doesn't have parent or children. They can be added to an object if these nodes have
-# been instantiated. In this code, the parents are instantiated first and can be added when constructing 
+# A default new node doesn't have parent or children.
+# They can be added to an object if these linked nodes have
+# been instantiated. In this code, the parents are instantiated
+# first and can be added as parents when constructing
 # a new node. The children need to be added later.
 
-# class for a node object
+
 class Node(object):
     """Class to create a simple node object and some methods"""
-    
-    # create new node object
+
     def __init__(self, value, parent=None, children=[]):
+        """Create a new node object"""
         self.value = value
         self.parent = parent
         self.children = children
-    
-    # assume parent of a node is a node
+
     def add_parent(self, parent):
-        """Set the parent of a node"""
+        """Set the parent of a node - assumed this is another node"""
         self.parent = parent
-    
-   
+
     def add_children(self, children):
-        """Set the children of a node, list of node(s)"""
+        """Set the children of a node, assumed this is list of node(s)"""
         self.children = children
 
-    #def get_parent(self):
+    # def get_parent(self):
     #    """Return the parent node of a node"""
     #    return self.parent.value
 
@@ -33,7 +34,7 @@ class Node(object):
         """Return the parent node of a node"""
         return self.parent
 
-    #def get_children(self):
+    # def get_children(self):
     #    """Return a list of all the values of the children nodes"""
     #    child_list = []
     #    for child in self.children:
@@ -41,18 +42,16 @@ class Node(object):
     #    return child_list
 
     def get_children(self):
+        """Return list of children nodes"""
         return self.children
 
     def is_root(self):
+        """Return Bool indicating if node is the root node"""
         return self.parent == None
 
     def is_leaf(self):
-        return self.children == [] 
-
-    # print the value of the object, not object itself
-    # This doesn't seem to work, fix it!
-    def __repr__(self):
-        return self.value
+        """Return Bool indicating if note is a leaf node"""
+        return self.children == []
 
 # create the small tree from example.
 a = Node("a")
@@ -65,35 +64,32 @@ g = Node("g", c)
 h = Node("h", c)
 
 # add the children to the nodes
-a.add_children([b,c])
-b.add_children([d,e,f])
-c.add_children([g,h])
+a.add_children([b, c])
+b.add_children([d, e, f])
+c.add_children([g, h])
 
 # 2. Implement DFS for tree implementation
 # We are going to start the search with the root node.
-# The function will check if the given node is root. 
-# Besides a node, the function takes a value to check for 
+# The function will check if the given node is root.
+# Besides a node, the function takes a value to check for
+# Note that with this function you also input other starting node
 
-# We want to start to search at the root of the tree, but with this function we could
-# start with any node
+
 def DFS(target, node):
     stack = []
     stack.append(node)
     while stack != []:
-        #print "stack is ", stack
+        # print "stack is ", stack
         visited = stack.pop()
-        #print "visited is", visited
+        # print "visited is", visited
         if visited.value == target:
             return target
         else:
-           children = visited.get_children()
-           for index in range(1, len(children) + 1):
-               stack.append(children[-index])
+            children = visited.get_children()
+            for index in range(1, len(children) + 1):
+                stack.append(children[-index])
     print "target not found!"
 
-print DFS ("g", a)
-print DFS ("z", a)
 
-        
-
-
+print DFS("g", a)
+print DFS("z", a)
