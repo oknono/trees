@@ -66,7 +66,8 @@ h = Node("h", c)
 # add the children to the nodes
 a.add_children([b, c])
 b.add_children([d, e, f])
-c.add_children([g, h])
+c.add_children([g])
+g.add_children([h])
 
 # 2. Implement DFS for tree implementation
 # We are going to start the search with the root node.
@@ -91,8 +92,11 @@ def DFS(target, node):
     stack.append(node)
     while stack:
         # take the last item from the list and compare
+        # for item in stack:
+        #    print item.value,
+        #print "\n"
         visited = stack.pop()
-        # check if this item has targer value
+        # check if this item has target value
         if visited.value == target:
             return target
         # Add children to the list, but reverse them    
