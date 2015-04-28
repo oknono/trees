@@ -89,7 +89,7 @@ def DFS(target, node):
     stack = []
     # Add root node to the stack
     stack.append(node)
-    while stack != []:
+    while stack:
         # take the last item from the list and compare
         visited = stack.pop()
         # check if this item has targer value
