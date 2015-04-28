@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # 1. Choose representation for Tree
 # A tree consists of nodes. For this purpose a
 # node has a name, a value, a parent (or None if root),
@@ -12,35 +14,44 @@
 class Node(object):
     """Class to create a simple node object and some methods"""
 
-    def __init__(self, value, parent=None, children=[]):
+    def __init__(self, value, parent = None, children = []):
         """Create a new node object"""
-        self.value = value
-        self.parent = parent
-        self.children = children
+        self._value = value
+        self._parent = parent
+        self._children = children
 
     def add_parent(self, parent):
         """Set the parent of a node - assumed this is another node"""
-        self.parent = parent
+        self._parent = parent
 
     def add_children(self, children):
         """Set the children of a node, assumed this is list of node(s)"""
-        self.children = children
+        self._children = children
 
-    def get_parent(self):
+    @property
+    def value(self):
+        """Return value of a node"""
+        return self._value
+    
+    @property
+    def parent(self):
         """Return the parent node of a node"""
-        return self.parent
-
-    def get_children(self):
-        """Return list of children nodes"""
-        return self.children
+        return self._parent
+    
+    @property
+    def children(self):
+        """Return list of child nodes"""
+        return self._children
 
     def is_root(self):
         """Return Bool indicating if node is the root node"""
-        return self.parent == None
+        return self._parent == None
 
     def is_leaf(self):
         """Return Bool indicating if note is a leaf node"""
-        return self.children == []
+        return self._children == []
+
+    
 
 # create the small tree from example.
 a = Node("a")
@@ -75,11 +86,11 @@ def DFS(target, node):
         if visited.value == target:
             return target
         else:
-            children = visited.get_children()
+            children = visited.children
             for index in range(1, len(children) + 1):
                 stack.append(children[-index])
-    print "target not found!"
 
-
-print DFS("g", a)
-print DFS("z", a)
+if __name__ == '__main__':
+    print DFS("d", a)
+    print DFS("g", a)
+    print DFS("z", a)
