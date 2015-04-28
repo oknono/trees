@@ -74,17 +74,28 @@ c.add_children([g, h])
 # Besides a node, the function takes a value to check for
 # Note that with this function you also input other starting node
 
+# Example run DFS("g", a)
+# stack = []
+# stack = [a]
+# stack = [c, b]
+# stack = [c, f, e, d]
+# stack = [c, f, e]
+# stack = [c, f]
+# stack = [c]
+# stack = [g]
 
 def DFS(target, node):
     """Takes target value and start node and returns target if found in tree"""
     stack = []
+    # Add root node to the stack
     stack.append(node)
     while stack != []:
-        # print "stack is ", stack
+        # take the last item from the list and compare
         visited = stack.pop()
-        # print "visited is", visited
+        # check if this item has targer value
         if visited.value == target:
             return target
+        # Add children to the list, but reverse them    
         else:
             children = visited.children
             for index in range(1, len(children) + 1):
